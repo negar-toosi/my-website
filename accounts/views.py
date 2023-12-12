@@ -18,12 +18,10 @@ from accounts.backends import EmailOrUsernameModelBackend
 def login_views(request):
     if request.method == 'POST':
         form = CustomAuthenticationForm(request=request,data=request.POST)
-        print(form.is_valid())
+        
         if form.is_valid():
             username_or_email = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            print(username_or_email)
-        
             user = authenticate(request, username=username_or_email, password=password)
             if user is not None:  
                 login(request,user) 
