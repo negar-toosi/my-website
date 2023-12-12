@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,14 +32,36 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize', 
+    'django.contrib.sites', 
+    'django_extensions',
+    'debug_toolbar',    
     'mysite.apps.MysiteConfig',
+    'django.contrib.sitemaps',
+    'robots',
     'blog',
+    'accounts',
+    'taggit',
+    'django_summernote',
+    'captcha',
+]
+SITE_ID = 2
+#captcha admin settings
+multi_captcha_admin = {
+    'engine': 'simple-captcha',
+}
+
+AUTHENTICATION_BACKENDS = [
+    'accounts.backends.EmailOrUsernameModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    
 ]
 
 MIDDLEWARE = [
@@ -49,9 +72,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'mywebsite.urls'
+import os
+
 
 TEMPLATES = [
     {
@@ -130,3 +156,10 @@ STATICFILES_DIRS = [BASE_DIR / "statics",]
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+INTERNAL_IPS = [
+
+    "127.0.0.1",
+
+]
+X_FRAME_OPTIONS = 'SAMEORIGIN'
