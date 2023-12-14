@@ -60,3 +60,6 @@ def signup_views(request):
         return render(request,'accounts/signup.html',context)
     else:
         redirect('/')
+
+def password_reset_views(request):
+    return render(request,'accounts/password_reset_form.html')
