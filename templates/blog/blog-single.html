@@ -24,6 +24,7 @@
 <!-- End banner Area -->
 
 <!-- Start post-content Area -->
+{% if post.is_published_date %}
 <section class="post-content-area single-post-area">
 	<div class="container">
 		<div class="row">
@@ -41,6 +42,7 @@
 							<li><a href="#">Politics,</a></li>
 							<li><a href="#">Lifestyle</a></li>
 						</ul>
+						
 						<div class="user-details row">
 							<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">Mark wiens</a> <span
 									class="lnr lnr-user"></span></p>
@@ -68,6 +70,7 @@
 						
 					
 				</div>
+				
 				<div class="navigation-area">
 					<div class="row">
 						<div
@@ -209,6 +212,9 @@
 		</div>
 	</div>
 </section>
+{% else %}
+<p>post not found</p>
+{% endif %}
 <!-- End post-content Area -->
 
 {% endblock %}

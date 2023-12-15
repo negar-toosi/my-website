@@ -7,8 +7,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-
+from datetime import datetime
+from django.utils import timezone
 def blog_view(request,**kwargs):
+    
     posts = Post.objects.filter(status = 1) #.order_by('id')
     
     if kwargs.get('cat_name') != None:
@@ -18,14 +20,14 @@ def blog_view(request,**kwargs):
     if kwargs.get('tag_name') != None:
         posts = posts.filter(tags__name__in=[kwargs['tag_name']])
 
-    posts = Paginator(posts,2)
-    page_number = request.GET.get('page')
-    try:
-        posts = posts.get_page(page_number)
-    except PageNotAnInteger:
-        posts = posts.get_page(1)
-    except EmptyPage:
-        posts = posts.get_page(1)
+    # posts = Paginator(posts,2)
+    # page_number = request.GET.get('page')
+    # try:
+    #     posts = posts.get_page(page_number)
+    # except PageNotAnInteger:
+    #     posts = posts.get_page(1)
+    # except EmptyPage:
+    #     posts = posts.get_page(1)
     context = {'posts': posts}
     return render(request,'blog/blog-home.html',context)
 

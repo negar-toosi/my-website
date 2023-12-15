@@ -6,8 +6,8 @@ from mysite.forms import NameForm,cantactForm,newsletterForm
 from django.http import HttpResponseRedirect 
 from django.contrib import messages
 def index_view(request):
-    
-    posts = Post.objects.all().prefetch_related('category')
+    # show the last 6 posts in home page 
+    posts = Post.objects.all().prefetch_related('category').order_by('-published_date')[:6]
     context = {'posts': posts}
     return render(request,'website/index.html',context)
 
