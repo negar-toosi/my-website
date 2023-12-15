@@ -11,7 +11,7 @@ from datetime import datetime
 from django.utils import timezone
 def blog_view(request,**kwargs):
     
-    posts = Post.objects.filter(status = 1) #.order_by('id')
+    posts = Post.objects.filter(status = 1).order_by('-created_date')
     
     if kwargs.get('cat_name') != None:
         posts = posts.filter(category__name=kwargs['cat_name'])
@@ -41,6 +41,20 @@ def blog_single(request,pid):
             messages.add_message(request,messages.ERROR,'your ticket didnt submited successfully')
     
     post = get_object_or_404(Post,id=pid,status=1)
+    posts = Post.objects.filter(status=1).order_by('-created_date')
+    print(posts.count())
+    
+    for i in posts.count():
+        if posts[i].id == pid:
+            if posts[i+1]:
+                next_post_check = True
+                next_post = posts[i+1]
+            elif posts[i-1]:
+                pervious_post_check = True
+                perv_post = posts[i-1]
+        
+
+    
     # increase the view of post when user refreshes the page
     if post:
         post.views = post.views + 1
@@ -48,7 +62,11 @@ def blog_single(request,pid):
     if not post.login_require:
         comments = Comments.objects.filter(post=post.id,approved=True).order_by('-created_date')
         form = commentsForm()
-        context = {'post': post,'comments':comments,'form':form}
+        context = {'post': post,
+                    'comments':comments,
+                    'form':form,
+                    'perv_post':perv_post,
+                    'next_post':next_post}
         return render(request,'blog/blog-single.html',context)
     else:
         return HttpResponseRedirect(reverse('accounts:login'))

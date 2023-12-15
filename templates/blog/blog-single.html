@@ -73,6 +73,7 @@
 				
 				<div class="navigation-area">
 					<div class="row">
+					{% if prev_post %}
 						<div
 							class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
 							<div class="thumb">
@@ -84,10 +85,11 @@
 							<div class="detials">
 								<p>Prev Post</p>
 								<a href="#">
-									<h4>Space The Final Frontier</h4>
+									<h4>prev_post.title</h4>
 								</a>
 							</div>
 						</div>
+						{% endif %}
 						<div
 							class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
 							<div class="detials">
@@ -105,6 +107,9 @@
 						</div>
 					</div>
 				</div>
+
+
+
 					<div class="comments-area">
 					
 					{% for comment in comments %}
