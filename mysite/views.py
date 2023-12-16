@@ -12,9 +12,11 @@ def index_view(request):
     return render(request,'website/index.html',context)
 
 def contact_view(request):
+    
     if request.method == 'POST':
         form = cantactForm(request.POST)
         if form.is_valid():
+            form.instance.name = 'unknown'
             form.save()
             messages.add_message(request,messages.SUCCESS,'your ticket submited successfully')
         else:
