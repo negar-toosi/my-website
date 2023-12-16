@@ -13,11 +13,16 @@ def index_view(request):
 
 def contact_view(request):
     
+            # Check if subject is provided or not
+            
     if request.method == 'POST':
         form = cantactForm(request.POST)
         if form.is_valid():
             form.instance.name = 'unknown'
-            form.save()
+            instance = form.save(commit=False)
+            if not form.cleaned_data['subject']:
+                instance.subject = None  # Setting subject to None explicitly
+            instance.save()
             messages.add_message(request,messages.SUCCESS,'your ticket submited successfully')
         else:
             messages.add_message(request,messages.ERROR,'your ticket didnt submit') 

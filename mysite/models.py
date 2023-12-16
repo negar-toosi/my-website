@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class content(models.Model):
     name = models.CharField(max_length=255)
-    subject = models.CharField(max_length=255, blank=True)
+    subject = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(max_length=255)
     massage = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
