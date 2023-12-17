@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load mysite_tags %}
 {% block content %}
 {% load static %}
 <!-- start banner Area -->
@@ -193,7 +193,10 @@
 		</div>
 		<div class="row">
 			<div class="active-recent-blog-carusel">
-				{% for post in posts %}
+				
+				{% get_last_six_posts as last_six_posts %}
+        		{% for post in last_six_posts %}
+				
 				<div class="single-recent-blog-post item">
 					<div class="thumb">
 						<img class="img-fluid" src="{{ post.image.url }}" alt="">
@@ -219,8 +222,9 @@
 						<h6 class="date">{{ post.published_date|date:"d M Y"}}</h6>
 					</div>
 				</div>
+				
 				{% endfor %}
-
+				
 			</div>
 		</div>
 	</div>

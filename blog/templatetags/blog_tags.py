@@ -25,3 +25,4 @@ def postCatgories():
     for name in categories:
         cat_dict[name] = posts.filter(category=name).count()
     return {'catgories': cat_dict}
+
