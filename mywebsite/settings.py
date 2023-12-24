@@ -16,7 +16,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -27,14 +26,16 @@ SECRET_KEY = 'django-insecure-(lwzlbe2*7_^hiama%4i*(df+n(4t#6=#nujxe38w*@92ii$+2
 DEBUG = True
 
 ALLOWED_HOSTS = []
-import os
-if DEBUG:
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_POST = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = os.environ.get('traces_email')
-    EMAIL_HOST_PASSWORD = os.environ.get('traces_email_password') 
+
+
+# import os
+# if DEBUG:
+#     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+#     EMAIL_HOST = 'smtp.gmail.com'
+#     EMAIL_POST = 587
+#     EMAIL_USE_TLS = True
+#     EMAIL_HOST_USER = os.environ.get('traces_email')
+#     EMAIL_HOST_PASSWORD = os.environ.get('traces_email_password') 
 
 
 # Application definition
@@ -60,8 +61,9 @@ INSTALLED_APPS = [
     'django_summernote',
     'captcha',
     'password_reset',
+    'crispy_forms',
 ]
-SITE_ID = 2
+SITE_ID = 2 
 #captcha admin settings
 multi_captcha_admin = {
     'engine': 'simple-captcha',
@@ -106,10 +108,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mywebsite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -155,22 +155,28 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
+STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 STATICFILES_DIRS = [BASE_DIR / "statics",]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 INTERNAL_IPS = [
 
     "127.0.0.1",
 
 ]
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'negar.tusi@gmail.com'
+EMAIL_HOST_PASSWORD = 'xxsstzibrqrwrsvc'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+

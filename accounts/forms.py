@@ -21,6 +21,7 @@ class UserCreationForm(UserCreationForm):
 
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(max_length=254, label='Username or Email')
+    
 
     # def clean(self):
     #     user_model = get_user_model()

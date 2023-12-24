@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 def index_view(request):
     # show the last 6 posts in home page 
-    posts = Post.objects.all().prefetch_related('category').order_by('-published_date')[:6]
+    posts = Post.objects.filter(status = 1) 
     context = {'posts': posts}
     return render(request,'website/index.html',context)
 
