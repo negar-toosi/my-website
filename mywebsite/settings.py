@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -72,10 +71,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    
 ]
 
 ROOT_URLCONF = 'mywebsite.urls'
-import os
 
 
 TEMPLATES = [
@@ -168,3 +167,4 @@ EMAIL_HOST_PASSWORD = 'xxsstzibrqrwrsvc'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+MAINTENANCE_MODE = False
