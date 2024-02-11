@@ -71,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    'mywebsite.middleware.MaintenanceModeMiddleware'
     
 ]
 
@@ -167,4 +168,4 @@ EMAIL_HOST_PASSWORD = 'xxsstzibrqrwrsvc'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-MAINTENANCE_MODE = False
+MAINTENANCE_MODE = True

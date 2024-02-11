@@ -6,9 +6,6 @@ from mysite.forms import NameForm,cantactForm,newsletterForm
 from django.http import HttpResponseRedirect 
 from django.contrib import messages
 
-def maintenance(request):
-    return render(request, 'website/maintenance.html')
-
 def index_view(request):
     # show the last 6 posts in home page 
     posts = Post.objects.filter(status = 1) 
