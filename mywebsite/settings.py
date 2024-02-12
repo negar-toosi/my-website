@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'captcha',
     'password_reset',
     'crispy_forms',
+    "compressor",
 ]
 
 #captcha admin settings
@@ -152,6 +153,12 @@ STATICFILES_DIRS = [BASE_DIR / "statics",]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
 
 
 INTERNAL_IPS = [
@@ -168,4 +175,4 @@ EMAIL_HOST_PASSWORD = 'xxsstzibrqrwrsvc'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-MAINTENANCE_MODE = True
+MAINTENANCE_MODE = False
