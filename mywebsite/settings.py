@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'password_reset',
     'crispy_forms',
     "compressor",
+    "crispy_bootstrap4",
 ]
 
 #captcha admin settings
@@ -64,6 +65,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.gzip.GZipMiddleware', 
+    'htmlmin.middleware.HtmlMinifyMiddleware', 
+    'htmlmin.middleware.MarkRequestMiddleware', 
+     
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -97,6 +102,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mywebsite.wsgi.application'
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+        "LOCATION": "127.0.0.1:11211",
+    }
+}
 
 
 # Password validation
@@ -156,10 +167,22 @@ STATICFILES_DIRS = [BASE_DIR / "statics",]
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # other finders..
     'compressor.finders.CompressorFinder',
 )
 
+COMPRESS_ENABLED = True
+COMPRESS_CSS_HASHING_METHOD = 'content'
+COMPRESS_FILTERS = {
+    'css':[
+        'compressor.filters.css_default.CssAbsoluteFilter',
+        'compressor.filters.cssmin.rCSSMinFilter',
+    ],
+    'js':[
+        'compressor.filters.jsmin.JSMinFilter',
+    ]
+}
+HTML_MINIFY = True
+KEEP_COMMENTS_ON_MINIFYING = True
 
 INTERNAL_IPS = [
 
@@ -176,3 +199,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 MAINTENANCE_MODE = False
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
