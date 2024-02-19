@@ -5,5 +5,5 @@ register = template.Library()
 
 @register.simple_tag
 def get_last_six_posts():
-    return Post.objects.all().prefetch_related('category').order_by('-published_date')[:6]
+    return Post.objects.filter(status=True).prefetch_related('category').order_by('-published_date')[:6]
     
