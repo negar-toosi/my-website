@@ -39,6 +39,9 @@ class Post(models.Model):
             return True
         else:
             return False
+class Meta:
+    ordering = ('-published_date',)
+    
 
 class Comments(models.Model):
     post = models.ForeignKey(Post,on_delete=models.CASCADE)

@@ -36,26 +36,24 @@ def blog_single(request,pid):
         form = commentsForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request,messages.SUCCESS,'your ticket submited successfully')
+            messages.success(request, 'your ticket submited successfully')
         else:
             messages.add_message(request,messages.ERROR,'your ticket didnt submited successfully')
     
     post = get_object_or_404(Post,id=pid,status=1)
-    posts = Post.objects.filter(status=1).order_by('-created_date')
+    posts = Post.objects.filter(status=1).order_by('-published_date')
     
     i = 0
     while posts[i].id != pid:
         i += 1
-    print(posts[i],i)
+    print(posts)
     if i == 0:
-        prev_post = Post.objects.get(pk=posts[len(posts) - 1].id)
         next_post = Post.objects.get(pk=posts[i+1].id)
     elif i == len(posts) - 1:
-        prev_post = Post.objects.get(pk=posts[i-1].id)
-        next_post = Post.objects.get(pk=posts[0].id)
+        prev_post = Post.objects.get(pk=posts[i-1].id)   
     else:
-        prev_post = Post.objects.get(pk=posts[i-1].id)
         next_post = Post.objects.get(pk=posts[i+1].id)
+        prev_post = Post.objects.get(pk=posts[i-1].id)
     # increase the view of post when user refreshes the page
     if post:
         post.views = post.views + 1
@@ -67,8 +65,15 @@ def blog_single(request,pid):
         context = {'post': post,
                     'comments':comments,
                     'form':form,
-                    'prev_post': prev_post,
-                    'next_post': next_post,}
+                }
+        if i == 0:
+            context['next_post'] = next_post
+        elif i == len(posts) - 1:
+            
+            context['prev_post'] = prev_post
+        else:
+            context['next_post'] = next_post
+            context['prev_post'] = prev_post
         return render(request,'blog/blog-single.html',context)
     else:
         return HttpResponseRedirect(reverse('accounts:login'))
