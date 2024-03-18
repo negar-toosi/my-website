@@ -200,7 +200,7 @@
     <img class="mb-4" src="{% static 'img/favicons/bootstrap-logo.svg' %}" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
     
-    
+    <input type="hidden" name="next" value="{{ request.GET.next }}">
     <div class="form-floating">
       <input type="text" class="form-control" name="username" placeholder="Username">
       <label for="floatingInput">Username or Email</label>

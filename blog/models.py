@@ -28,7 +28,7 @@ class Post(models.Model):
     published_date = models.DateTimeField(null=True)
 
     def __str__(self):
-        return self.title
+        return '{},{}'.format(self.title, self.id)
     
     def get_absolute_url(self):
         return reverse('blog:single', kwargs={'pid':self.id})
@@ -54,7 +54,7 @@ class Comments(models.Model):
     approved = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-created_date']
+        ordering = ('-created_date',)
 
     def __str__(self):
         return self.name

@@ -4,7 +4,7 @@ from django_summernote.admin import SummernoteModelAdmin
 # Register your models here.
 class postAdmin(SummernoteModelAdmin):
     summernote_fields = ('content',)
-    ordering = ('-published_date',)
+    ordering = ('published_date',)
 @admin.register(Comments)    
 class CommentsAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_date'

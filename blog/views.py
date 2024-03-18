@@ -11,7 +11,7 @@ from datetime import datetime
 from django.utils import timezone
 def blog_view(request,**kwargs):
     
-    posts = Post.objects.filter(status = 1).order_by('-created_date')
+    posts = Post.objects.filter(status = 1).order_by('published_date')
     
     if kwargs.get('cat_name') != None:
         posts = posts.filter(category__name=kwargs['cat_name'])
@@ -41,7 +41,7 @@ def blog_single(request,pid):
             messages.add_message(request,messages.ERROR,'your ticket didnt submited successfully')
     
     post = get_object_or_404(Post,id=pid,status=1)
-    posts = Post.objects.filter(status=1).order_by('-published_date')
+    posts = Post.objects.filter(status=1).order_by('published_date',)
     
     i = 0
     while posts[i].id != pid:
@@ -69,7 +69,6 @@ def blog_single(request,pid):
         if i == 0:
             context['next_post'] = next_post
         elif i == len(posts) - 1:
-            
             context['prev_post'] = prev_post
         else:
             context['next_post'] = next_post

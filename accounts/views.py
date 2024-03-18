@@ -32,15 +32,17 @@ def login_views(request):
             password = form.cleaned_data.get('password')
             user = authenticate(request, username=username_or_email, password=password)
             if user is not None:  
-                login(request,user) 
-                return redirect('/')
+                login(request,user)
+                next_url = request.POST.get('next', '/')
+                return redirect(next_url)      
             else:
                 username_or_email = form.cleaned_data.get('email')
                 password = form.cleaned_data.get('password')
                 user = EmailOrUsernameModelBackend.authenticate(request, email=username_or_email, password=password)
                 if user is not None:  
                     login(request,user) 
-                    return redirect('/')
+                    next_url = request.POST.get('next', '/')
+                    return redirect(next_url)
         else:
             messages.add_message(request,messages.ERROR,'your username or password was wrong')
 

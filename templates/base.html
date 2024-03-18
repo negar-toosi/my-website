@@ -47,7 +47,7 @@
                             <li><a href="#">logged in as {{ request.user.username }}</a></li>
                             <li><a href="{% url 'accounts:logout' %}">logout</a></li>
                             {% else %}
-                            <li><a href="{% url 'accounts:login' %}">login</a></li>
+                            <li><a href="{% url 'accounts:login' %}?next={{ request.path }}">login</a></li>
                             <li><a href="{% url 'accounts:signup' %}">signup</a></li>
                             {% endif %}
                         </ul>
