@@ -46,7 +46,7 @@ def blog_single(request,pid):
     i = 0
     while posts[i].id != pid:
         i += 1
-    print(posts)
+   
     if i == 0:
         next_post = Post.objects.get(pk=posts[i+1].id)
     elif i == len(posts) - 1:
@@ -58,10 +58,14 @@ def blog_single(request,pid):
     if post:
         post.views = post.views + 1
         post.save()
-    if not post.login_require:
-        comments = Comments.objects.filter(post=post.id,approved=True).order_by('-created_date')
-        form = commentsForm()
-        
+
+    
+    comments = Comments.objects.filter(post=post.id,approved=True).order_by('-created_date')
+    form = commentsForm()
+    if news.login_require == True and not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('accounts:login'))
+
+
         context = {'post': post,
                     'comments':comments,
                     'form':form,
@@ -74,8 +78,7 @@ def blog_single(request,pid):
             context['next_post'] = next_post
             context['prev_post'] = prev_post
         return render(request,'blog/blog-single.html',context)
-    else:
-        return HttpResponseRedirect(reverse('accounts:login'))
+   
 
 def blog_search(request):
     posts = Post.objects.filter(status = 1)

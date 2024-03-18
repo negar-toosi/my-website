@@ -51,7 +51,7 @@ def login_views(request):
     
     context = {'form':form}
     return render(request,'accounts/login.html',context)
-@login_required
+
 def logout_views(request):
     
     logout(request)
