@@ -22,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(lwzlbe2*7_^hiama%4i*(df+n(4t#6=#nujxe38w*@92ii$+2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
@@ -77,7 +77,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-    'mywebsite.middleware.MaintenanceModeMiddleware'
+   
     
 ]
 
@@ -200,7 +200,7 @@ EMAIL_HOST_PASSWORD = 'xxsstzibrqrwrsvc'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-MAINTENANCE_MODE = False
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

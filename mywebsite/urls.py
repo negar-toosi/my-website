@@ -56,3 +56,5 @@ if settings.DEBUG:
     urlpatterns += [
         path(r'^__debug__/', include(debug_toolbar.urls)),
     ]
+
+handler404 = 'mysite.views.custom_404'

@@ -56,3 +56,6 @@ def test(request):
             return HttpResponse('not valid')
     form = cantactForm()
     return render(request,'website/test.html',{'form':form})
+
+def custom_404(request, exception):
+    return render(request, 'website/404.html', status=404)
