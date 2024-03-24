@@ -25,7 +25,7 @@ import debug_toolbar
 from django.urls import include
 from django.contrib.auth import views as auth_views
 from django.http import HttpResponse
-
+from mywebsite import views
 sitemaps = {
     'static': StaticViewSitemap,
     'blog': BlogSitemap,
@@ -33,6 +33,7 @@ sitemaps = {
 
 
 urlpatterns = [
+    path('maintenance/',views.maintenance_view,name='maintenance'),
     path('admin/', admin.site.urls),
     path('', include('mysite.urls')),
     path('blog/',include('blog.urls')),
@@ -43,10 +44,10 @@ urlpatterns = [
     path('robots.txt', include('robots.urls')), 
     path('__debug__/', include(debug_toolbar.urls)),
     path('captcha/', include('captcha.urls')),
-    path("accounts/", include("django.contrib.auth.urls")),
-    
-    
+    path("accounts/", include("django.contrib.auth.urls")),  
 ]
+
+
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -62,10 +62,10 @@ def blog_single(request,pid):
     
     comments = Comments.objects.filter(post=post.id,approved=True).order_by('-created_date')
     form = commentsForm()
-    if news.login_require == True and not request.user.is_authenticated:
+    if post.login_require == True and not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('accounts:login'))
 
-
+    else:
         context = {'post': post,
                     'comments':comments,
                     'form':form,

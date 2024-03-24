@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import *
-
+from . import views
+from django.conf import settings
 app_name = 'mysite'
 
 
