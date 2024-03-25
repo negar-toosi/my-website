@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(lwzlbe2*7_^hiama%4i*(df+n(4t#6=#nujxe38w*@92ii$+2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 # Application definition
@@ -200,4 +200,4 @@ EMAIL_USE_TLS = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-MAINTENANCE_MODE = True
+MAINTENANCE_MODE = False
